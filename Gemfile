@@ -36,6 +36,8 @@ gem 'simple_form'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'pry-rails'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -48,7 +50,8 @@ group :development, :test do
 
   gem 'rspec-rails', '~> 3.5'
   gem 'factory_girl_rails', '~> 4.0'
-  gem 'simplecov', :require => false, :group => :test
+  gem 'simplecov', :require => false, group: :test
+  gem 'shoulda-matchers', '~> 3.1', group: :test
 end
 
 group :development do

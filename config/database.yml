@@ -11,6 +11,7 @@ development:
   password: <%= ENV['PGSQL_USER_PASSWORD'].to_s rescue '' %>
 
 test:
+  <<: *default
   database: task_manager_test
   username: shaman
   password: <%= ENV['PGSQL_USER_PASSWORD'].to_s rescue '' %>
