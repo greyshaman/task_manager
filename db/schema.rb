@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160725183901) do
+ActiveRecord::Schema.define(version: 20160725190522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,11 +27,11 @@ ActiveRecord::Schema.define(version: 20160725183901) do
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email"
-    t.string   "encrypted_password"
-    t.string   "role"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.string   "email",                               null: false
+    t.string   "encrypted_password",                  null: false
+    t.string   "role",               default: "USER", null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
 end
