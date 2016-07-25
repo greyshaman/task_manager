@@ -18,3 +18,4 @@
 
 *.plan
 *.plan~
+/coverage
