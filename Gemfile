@@ -28,6 +28,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'state_machine'
 gem 'ruby-graphviz', :require => 'graphviz' # Optional: only required for graphing
 
+# Simple Form
+gem 'simple_form'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
