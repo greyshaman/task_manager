@@ -1,0 +1,16 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  database: task_manager_development
+  username: shaman
+  password: <%= ENV['PGSQL_USER_PASSWORD'].to_s rescue '' %>
+
+test:
+  database: task_manager_test
+  username: shaman
+  password: <%= ENV['PGSQL_USER_PASSWORD'].to_s rescue '' %>
