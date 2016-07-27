@@ -12,6 +12,8 @@ RSpec.describe User, type: :model do
 
   context "validation" do
     subject {FactoryGirl.create(:user)}
+
     it {expect(subject).to validate_uniqueness_of(:email)}
+    it {expect(subject).to validate_presence_of(:email)}
   end
 end

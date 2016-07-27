@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 
   # Validators
   validates :email, uniqueness: true
+  validates :email, presence: true
 
   attr_writer :password
 
