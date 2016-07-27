@@ -1,7 +1,10 @@
 FactoryGirl.define do
   factory :user do
-    email "MyString"
+    email "test@example.com"
     password "Password"
-    role "MyString"
+
+    before(:create) do |user|
+      user.encrypt_password
+    end
   end
 end

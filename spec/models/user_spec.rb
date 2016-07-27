@@ -11,9 +11,15 @@ RSpec.describe User, type: :model do
   end
 
   context "validation" do
-    subject {FactoryGirl.create(:user)}
 
-    it {expect(subject).to validate_uniqueness_of(:email)}
-    it {expect(subject).to validate_presence_of(:email)}
+    context "email field" do
+      context "uniqueness" do
+        subject {FactoryGirl.create(:user)}
+        it {expect(subject).to validate_uniqueness_of(:email)}
+      end
+
+      it {expect(subject).to validate_presence_of(:email)}
+      it {expect(subject).to allow_value('aa@bb.cc').for(:email)}
+    end
   end
 end
