@@ -50,8 +50,12 @@ group :development, :test do
 
   gem 'rspec-rails', '~> 3.5'
   gem 'factory_girl_rails', '~> 4.0'
-  gem 'simplecov', :require => false, group: :test
-  gem 'shoulda-matchers', '~> 3.1', group: :test
+end
+
+group :test do
+  gem 'simplecov', :require => false
+  gem 'shoulda-matchers', '~> 3.1'
+  gem 'database_cleaner'
 end
 
 group :development do
