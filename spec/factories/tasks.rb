@@ -1,15 +1,17 @@
 FactoryGirl.define do
   factory :task do
-    name "Weak Up"
+    name  "Weak Up"
     user
     state "new"
 
     trait :started do
-      state "started"
+      state       "started"
+      started_at  {DateTime.now}
     end
 
     trait :finished do
-      state "finished"
+      state       "finished"
+      finished_at {DateTime.now}
     end
   end
 end
