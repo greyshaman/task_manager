@@ -16,5 +16,23 @@ RSpec.describe Task, type: :model do
 
   context "validations" do
     it {is_expected.to validate_presence_of(:name)}
+    it {is_expected.to validate_presence_of(:user_id)}
+  end
+
+  context "in new instance" do
+    it {expect(subject.state).to eql("new") }
+  end
+
+  context "states" do
+    subject {FactoryGirl.create(:task)}
+    it 'should be an initial state' do
+      expect(subject).to be_initial
+    end
+
+    it 'shoudld be satrted after transition from :new to :started' do
+      subject.start!
+      expect(subject).to be_started
+      expect(subject.started_at).to be_present
+    end
   end
 end
