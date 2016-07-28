@@ -27,7 +27,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'activerecord-session_store'
 
 # State Machine
-gem 'state_machine'
+# gem 'state_machine'
+gem 'state_machines-activerecord'
 gem 'ruby-graphviz', :require => 'graphviz' # Optional: only required for graphing
 
 # Simple Form
