@@ -3,6 +3,9 @@ class User < ActiveRecord::Base
   attr_accessor :password, :password_confirmation
   ROLES = %w(ADMIN USER)
 
+  # Associations
+  has_many :tasks, dependent: :destroy
+
   # Validators
   validates :email, uniqueness: true
   validates :email, presence: true

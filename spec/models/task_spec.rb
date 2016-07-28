@@ -9,4 +9,8 @@ RSpec.describe Task, type: :model do
     it {is_expected.to have_db_column(:started_at).of_type(:datetime)}
     it {is_expected.to have_db_column(:finished_at).of_type(:datetime)}
   end
+
+  context "associations" do
+    it {is_expected.to belong_to(:user)}
+  end
 end

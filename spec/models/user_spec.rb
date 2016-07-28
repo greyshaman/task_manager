@@ -7,7 +7,10 @@ RSpec.describe User, type: :model do
     it {is_expected.to have_db_column(:role).of_type(:string).with_options(null: false, default: 'USER')}
 
     it {is_expected.to have_db_index(:email).unique(true)}
+  end
 
+  context "associations" do
+    it {is_expected.to have_many(:tasks).dependent(:destroy)}
   end
 
   context "validation" do
