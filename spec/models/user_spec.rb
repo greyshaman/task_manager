@@ -15,11 +15,24 @@ RSpec.describe User, type: :model do
     context "email field" do
       context "uniqueness" do
         subject {FactoryGirl.create(:user)}
-        it {expect(subject).to validate_uniqueness_of(:email)}
+        it {is_expected.to validate_uniqueness_of(:email)}
       end
 
-      it {expect(subject).to validate_presence_of(:email)}
-      it {expect(subject).to allow_value('aa@bb.cc').for(:email)}
+      it {is_expected.to validate_presence_of(:email)}
+      it {is_expected.to allow_value('aa@bb.cc').for(:email)}
+      it {is_expected.not_to allow_value('aa.bb.cc').for(:email)}
+    end
+
+    context "encrypted_password" do
+      it {is_expected.to validate_presence_of(:encrypted_password)}
+    end
+
+    context "password" do
+      it {is_expected.to validate_confirmation_of(:password)}
+    end
+
+    context "roles" do
+      it {is_expected.to validate_inclusion_of(:role).in_array(%w(ADMIN USER))}
     end
   end
 end
