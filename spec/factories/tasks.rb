@@ -5,8 +5,9 @@ FactoryGirl.define do
     state "new"
 
     trait :started do
-      state       "started"
-      started_at  {DateTime.now}
+      after(:create) do |_task|
+        _task.start
+      end
     end
 
     trait :finished do

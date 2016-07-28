@@ -23,16 +23,29 @@ RSpec.describe Task, type: :model do
     it {expect(subject.state).to eql("new") }
   end
 
-  context "states" do
-    subject {FactoryGirl.create(:task)}
-    it 'should be an initial state' do
-      expect(subject).to be_initial
+  context "state" do
+    describe "new" do
+      subject {FactoryGirl.create(:task)}
+      it 'should be an initial state' do
+        is_expected.to be_new
+      end
+
+      it 'shoudld be satrted after transition from :new to :started' do
+        subject.start
+        is_expected.to be_started
+        expect(subject.started_at).to be_present
+      end
     end
 
-    it 'shoudld be satrted after transition from :new to :started' do
-      subject.start!
-      expect(subject).to be_started
-      expect(subject.started_at).to be_present
+    describe "started" do
+      subject {FactoryGirl.create(:task, :started)}
+
+      it 'should be finished after transition from :started to :finished' do
+        is_expected.to be_started
+        subject.finish
+        is_expected.to be_finished
+        expect(subject.finished_at).to be_present
+      end
     end
   end
 end
