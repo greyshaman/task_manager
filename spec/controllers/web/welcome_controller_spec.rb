@@ -10,7 +10,7 @@ RSpec.describe Web::WelcomeController, type: :controller do
         get :index
       end
 
-      it {expect(response).to redirect_to(user_tasks_path(user))}
+      it {expect(response).to redirect_to(tasks_path)}
     end
 
     context 'for not logged in user' do

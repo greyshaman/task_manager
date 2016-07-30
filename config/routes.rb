@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   scope module: 'web' do
-    resources :users do
-      resources :tasks
-    end
+    resources :users
+    resources :tasks
 
     root to: 'welcome#index'
   end
