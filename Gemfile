@@ -42,6 +42,8 @@ gem 'pry-stack_explorer'
 gem 'pry-nav'
 gem 'pry-state'
 
+gem "slim"
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
