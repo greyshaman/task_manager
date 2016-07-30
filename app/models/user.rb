@@ -30,6 +30,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def user?
+    role == "USER"
+  end
+
+  def admin?
+    role == "ADMIN"
+  end
+
   def encrypt_password
     self.encrypted_password = BCrypt::Password.create(@password).to_s if @password.present? && @password == @password_confirmation
   end

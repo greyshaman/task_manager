@@ -36,6 +36,20 @@ RSpec.describe User, type: :model do
 
     context "roles" do
       it {is_expected.to validate_inclusion_of(:role).in_array(%w(ADMIN USER))}
+
+      context "for user" do
+        let!(:user) {FactoryGirl.create(:user)}
+
+        it {expect(user).to be_user}
+        it {expect(user).not_to be_admin}
+      end
+
+      context "for admin" do
+        let!(:admin) {FactoryGirl.create(:admin)}
+
+        it {expect(admin).to be_admin}
+        it {expect(admin).not_to be_user}
+      end
     end
   end
 
