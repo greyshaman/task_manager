@@ -27,7 +27,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'activerecord-session_store'
 
 # State Machine
-gem 'state_machine'
+# gem 'state_machine'
+gem 'state_machines-activerecord'
 gem 'ruby-graphviz', :require => 'graphviz' # Optional: only required for graphing
 
 # Simple Form
@@ -37,6 +38,11 @@ gem 'simple_form'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'pry-rails'
+gem 'pry-stack_explorer'
+gem 'pry-nav'
+gem 'pry-state'
+
+gem "slim"
 
 # Use Unicorn as the app server
 # gem 'unicorn'

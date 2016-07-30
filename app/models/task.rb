@@ -1,4 +1,31 @@
 class Task < ActiveRecord::Base
   # Associations
   belongs_to :user
+
+  # Validators
+  validates :name, presence: true
+  validates :user_id, presence: true
+
+  # States
+  state_machine :state, initial: :new do
+    after_transition new: :started, do: :on_start
+    after_transition started: :finished, do: :on_finish
+
+    event :start do
+      transition :new => :started
+    end
+
+    event :finish do
+      transition started: :finished
+    end
+  end
+
+  private
+    def on_start
+      update_attribute :started_at, DateTime.now
+    end
+
+    def on_finish
+      update_attribute :finished_at, DateTime.now
+    end
 end
