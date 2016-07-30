@@ -68,4 +68,18 @@ RSpec.describe User, type: :model do
       expect(User.authenticate("user@example.com", "Password1")).to be_nil
     end
   end
+
+  context '#user?' do
+    let (:user) {FactoryGirl.create(:user)}
+
+    it {expect(user.user?).to be true}
+    it {expect(user.admin?).to be false}
+  end
+
+  context '#admin?' do
+    let (:admin) {FactoryGirl.create(:admin)}
+
+    it {expect(admin.admin?).to be true}
+    it {expect(admin.user?).to be false}
+  end
 end
