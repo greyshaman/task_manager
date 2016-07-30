@@ -38,6 +38,9 @@ gem 'simple_form'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'pry-rails'
+gem 'pry-stack_explorer'
+gem 'pry-nav'
+gem 'pry-state'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
