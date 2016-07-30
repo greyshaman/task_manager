@@ -38,4 +38,20 @@ RSpec.describe User, type: :model do
       it {is_expected.to validate_inclusion_of(:role).in_array(%w(ADMIN USER))}
     end
   end
+
+  context ".authentication" do
+    let!(:user) {FactoryGirl.create(:user, email: 'user@example.com')}
+
+    it "should return user instance when specified correct email and password" do
+      expect(User.authenticate('user@example.com', 'Password')).to be_instance_of(User)
+    end
+
+    it "should return nil when specified incorrect email" do
+      expect(User.authenticate("other@example.com", "Password")).to be_nil
+    end
+
+    it "should return nil when specified incorrect password" do
+      expect(User.authenticate("user@example.com", "Password1")).to be_nil
+    end
+  end
 end

@@ -21,6 +21,15 @@ class User < ActiveRecord::Base
   # Callbacks
   before_create :encrypt_password
 
+  def self.authenticate(email, password)
+    user = User.find_by_email(email)
+    if user && BCrypt::Password.new(user.encrypted_password) == password
+      user
+    else
+      nil
+    end
+  end
+
   def encrypt_password
     self.encrypted_password = BCrypt::Password.create(@password).to_s if @password.present? && @password == @password_confirmation
   end
