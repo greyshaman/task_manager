@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  context "attributes" do
+  context "as attributes" do
     it {is_expected.to have_db_column(:email).of_type(:string).with_options(null: false)}
     it {is_expected.to have_db_column(:encrypted_password).of_type(:string).with_options(null: false)}
     it {is_expected.to have_db_column(:role).of_type(:string).with_options(null: false, default: 'USER')}
@@ -9,11 +9,11 @@ RSpec.describe User, type: :model do
     it {is_expected.to have_db_index(:email).unique(true)}
   end
 
-  context "associations" do
+  context "as associations" do
     it {is_expected.to have_many(:tasks).dependent(:destroy)}
   end
 
-  context "validations" do
+  context "as validations" do
 
     context "email field" do
       context "uniqueness" do
