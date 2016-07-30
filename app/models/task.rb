@@ -20,6 +20,11 @@ class Task < ActiveRecord::Base
     end
   end
 
+  # Scopes
+  scope :initiated, ->{where(state: 'new')}
+  scope :started, ->{where(state: 'started')}
+  scope :finished, ->{where(state: 'finished')}
+
   private
     def on_start
       update_attribute :started_at, DateTime.now
