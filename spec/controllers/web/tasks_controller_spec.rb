@@ -771,7 +771,7 @@ RSpec.describe Web::TasksController, type: :controller do
 
       it 'response should contains reason' do
         response_data = JSON.parse(response.body)
-        expect(response_data['reason']).to eq("Permission denied")
+        expect(response_data['reason']).to eq("Permission denied!")
       end
     end
 
@@ -788,7 +788,7 @@ RSpec.describe Web::TasksController, type: :controller do
 
       it 'response should contains reason' do
         response_data = JSON.parse(response.body)
-        expect(response_data['reason']).to eq("Task not found")
+        expect(response_data['reason']).to eq("Task not found!")
       end
     end
 
@@ -805,7 +805,7 @@ RSpec.describe Web::TasksController, type: :controller do
 
       it 'response should contains reason' do
         response_data = JSON.parse(response.body)
-        expect(response_data['reason']).to eq("User not found")
+        expect(response_data['reason']).to eq("User not found!")
       end
     end
   end
