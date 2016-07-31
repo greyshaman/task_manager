@@ -11,8 +11,13 @@ FactoryGirl.define do
     end
 
     trait :finished do
-      state       "finished"
-      finished_at {DateTime.now}
+      after(:create) do |_task|
+        _task.start
+        _task.finish
+      end
     end
+
+    factory :started_task, traits: [:started]
+    factory :finished_task, traits: [:finished]
   end
 end

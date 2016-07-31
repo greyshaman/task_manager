@@ -30,7 +30,7 @@ RSpec.describe Task, type: :model do
         is_expected.to be_new
       end
 
-      it 'shoudld be satrted after transition from :new to :started' do
+      it 'shoudld be started after transition from :new to :started' do
         subject.start
         is_expected.to be_started
         expect(subject.started_at).to be_present
@@ -47,5 +47,15 @@ RSpec.describe Task, type: :model do
         expect(subject.finished_at).to be_present
       end
     end
+  end
+
+  context 'scopes' do
+    let!(:initiated_tasks) {FactoryGirl.create_list(:task, 5)}
+    let!(:started_tasks) {FactoryGirl.create_list(:started_task, 4)}
+    let!(:finished_tasks) {FactoryGirl.create_list(:finished_task, 3)}
+
+    it {expect(Task.initiated.count).to eq(5)}
+    it {expect(Task.started.count).to eq(4)}
+    it {expect(Task.finished.count).to eq(3)}
   end
 end
