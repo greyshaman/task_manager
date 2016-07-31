@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
 
 
   # Callbacks
-  before_create :encrypt_password
+  before_validation :encrypt_password, if: Proc.new {|_user| _user.password.present? || _user.password_confirmation.present?}
 
   def self.authenticate(email, password)
     user = User.find_by_email(email)
