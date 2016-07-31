@@ -8,7 +8,7 @@ class Web::TasksController < Web::ApplicationController
     scope = Task.all
     scope = scope.where(user_id: current_user.id) if current_user.user?
 
-    @tasks = (current_user.admin? || current_user.id == params[:user_id].try(:to_i)) ? scope.all : []
+    @tasks = scope.all
   end
 
   def new

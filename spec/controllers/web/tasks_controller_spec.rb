@@ -21,7 +21,7 @@ RSpec.describe Web::TasksController, type: :controller do
     context "when admin access" do
       before do
         session[:user_id] = admin.id
-        get :index, user_id: admin.id
+        get :index
       end
 
       it {expect(response).to render_template(:index)}
@@ -32,21 +32,11 @@ RSpec.describe Web::TasksController, type: :controller do
     context "when user access with correct user_id in request url" do
       before do
         session[:user_id] = user_1.id
-        get :index, user_id: user_1.id
+        get :index
       end
 
       it {expect(response).to render_template(:index)}
       it {expect(assigns[:tasks].length).to eq(Task.where(user_id: user_1.id).count)}
-    end
-
-    context "when user access with user_id from other user in request url" do
-      before do
-        session[:user_id] = user_1.id
-        get :index, user_id: user_2.id
-      end
-
-      it {expect(response).to render_template(:index)}
-      it {expect(assigns[:tasks].length).to eq(0)}
     end
   end
   # new
