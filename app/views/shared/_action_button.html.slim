@@ -1,0 +1,8 @@
+- glyphicon_class ||= ""
+- title           ||= ""
+- action_path     ||= ""
+- method          ||= "get"
+- confirm         ||= nil
+
+= link_to action_path, class: "btn btn-default", title: title, method: method, data: {confirm: confirm} do
+  span.glyphicon class=glyphicon_class

@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'helpers/capybara_helpers'
+require 'support/capybara_helpers'
 
 RSpec.configure do |c|
   c.include CapybaraHelpers

@@ -1,0 +1,13 @@
+tr.item-row
+  td= task.name
+  td= task.description
+  - if current_user.admin?
+    td= task.user.email
+  td= task.state
+  td= task.created_at.try(:strftime, '%d/%m/%Y %H:%M')
+  td
+    .btn-group
+      = render '/shared/action_button', glyphicon_class: "glyphicon-edit", title: "edit", action_path: edit_task_path(task)
+      = render '/shared/action_button', glyphicon_class: "glyphicon-search", title: "view", action_path: task_path(task)
+      = render '/shared/action_button', glyphicon_class: "glyphicon-trash", title: "delete", action_path: "/tasks/#{task.id}", method: "delete", confirm: "You trying delete task! Are you sure?"
+
