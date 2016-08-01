@@ -1,7 +1,7 @@
 = simple_form_for @task, class: "form-horizontal", role: "form" do |f|
   = f.input :name
   = f.input :description
-  = show_attachment
+  = show_attachment if @task.attachment.file.present?
   = f.file_field :attachment
   = f.input :attachment_cache, as: :hidden
   - if current_user.admin?
