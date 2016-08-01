@@ -13,6 +13,9 @@ class User < ActiveRecord::Base
 
   validates :encrypted_password, presence: true
 
+  validates :password, presence: true, if: Proc.new {|_user| _user.new_record? || _user.password_confirmation.present?}
+  validates :password_confirmation, presence: true, if: Proc.new {|_user| _user.new_record? || _user.password.present?}
+
   validates :password, confirmation: true
 
   validates :role, inclusion: {in: ROLES}
