@@ -15,7 +15,8 @@
 
           - unless @task.attachment.file.nil?
             dt Attachment
-            dd= image_tag @task.attachment_url
+            dd= show_attachment
+
 
           - if current_user.admin?
             dt User assigned
