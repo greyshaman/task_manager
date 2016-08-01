@@ -26,7 +26,7 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem 'activerecord-session_store', git: "git@github.com:rails/activerecord-session_store.git"
+gem 'activerecord-session_store', git: "https://github.com/rails/activerecord-session_store.git"
 
 # State Machine
 # gem 'state_machine'
