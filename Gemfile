@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
-ruby "2.3.1"
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
 gem 'pg'
@@ -27,7 +26,7 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem 'activerecord-session_store', git: "git@github.com:rails/activerecord-session_store.git"
+gem 'activerecord-session_store', git: "https://github.com/rails/activerecord-session_store.git"
 
 # State Machine
 # gem 'state_machine'
@@ -80,3 +79,4 @@ group :development do
   gem 'spring'
 end
 
+ruby "2.3.1"
