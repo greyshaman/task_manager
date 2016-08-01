@@ -7,6 +7,7 @@ RSpec.describe SessionsController, type: :controller do
 
     it {expect(response).to render_template(:new)}
     it {expect(response).to have_http_status(200)}
+    it {expect(assigns[:user]).to be_instance_of(User) }
   end
 
   context "#create" do

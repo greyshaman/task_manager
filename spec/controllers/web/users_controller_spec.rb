@@ -9,7 +9,7 @@ RSpec.describe Web::UsersController, type: :controller do
     context 'when not logged in user try access then' do
       before {get :index}
 
-      it {expect(response).to redirect_to(new_session_path)}
+      it {expect(response).to redirect_to(log_in_path)}
     end
 
     context "when admin access" do
@@ -38,7 +38,7 @@ RSpec.describe Web::UsersController, type: :controller do
     context 'when not logged in user try access then' do
       before {get :new}
 
-      it {expect(response).to redirect_to(new_session_path)}
+      it {expect(response).to redirect_to(log_in_path)}
     end
 
     context "when user access" do
@@ -67,7 +67,7 @@ RSpec.describe Web::UsersController, type: :controller do
     context 'when not logged in user try access then' do
       before {post :create, user: FactoryGirl.attributes_for(:user)}
 
-      it {expect(response).to redirect_to(new_session_path)}
+      it {expect(response).to redirect_to(log_in_path)}
     end
 
     context "when user access" do
@@ -160,7 +160,7 @@ RSpec.describe Web::UsersController, type: :controller do
     context 'when not logged in user try access then' do
       before {get :edit, id: user_1.id}
 
-      it {expect(response).to redirect_to(new_session_path)}
+      it {expect(response).to redirect_to(log_in_path)}
     end
 
     context "when admin access" do
@@ -211,7 +211,7 @@ RSpec.describe Web::UsersController, type: :controller do
     context 'when not logged in user try access then' do
       before {put :update, id: user_1.id, user: FactoryGirl.attributes_for(:user)}
 
-      it {expect(response).to redirect_to(new_session_path)}
+      it {expect(response).to redirect_to(log_in_path)}
     end
 
     context "when admin update user profile" do
@@ -313,7 +313,7 @@ RSpec.describe Web::UsersController, type: :controller do
     context 'when not logged in user try access then' do
       before {get :show, id: user_1.id}
 
-      it {expect(response).to redirect_to(new_session_path)}
+      it {expect(response).to redirect_to(log_in_path)}
     end
 
     context "when admin access" do
@@ -374,7 +374,7 @@ RSpec.describe Web::UsersController, type: :controller do
     context 'when not logged in user try access then' do
       before {delete :destroy, id: user_1.id}
 
-      it {expect(response).to redirect_to(new_session_path)}
+      it {expect(response).to redirect_to(log_in_path)}
     end
 
     context "when admin destroy other account" do

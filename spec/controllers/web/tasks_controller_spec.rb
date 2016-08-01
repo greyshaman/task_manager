@@ -14,7 +14,7 @@ RSpec.describe Web::TasksController, type: :controller do
     context 'when not logged in user try access then' do
       before {get :index}
 
-      it {expect(response).to redirect_to(new_session_path)}
+      it {expect(response).to redirect_to(log_in_path)}
     end
 
     # # index (admin)
@@ -44,7 +44,7 @@ RSpec.describe Web::TasksController, type: :controller do
     context 'when not logged in user try access then' do
       before {get :new}
 
-      it {expect(response).to redirect_to(new_session_path)}
+      it {expect(response).to redirect_to(log_in_path)}
     end
 
     # # new (admin with user_id)
@@ -121,7 +121,7 @@ RSpec.describe Web::TasksController, type: :controller do
     context 'when not logged in user try access then' do
       before {post :create, task: FactoryGirl.attributes_for(:task, user_id: 1)}
 
-      it {expect(response).to redirect_to(new_session_path)}
+      it {expect(response).to redirect_to(log_in_path)}
     end
 
     context "when admin post new self task" do
@@ -209,7 +209,7 @@ RSpec.describe Web::TasksController, type: :controller do
     context 'when not logged in user try access then' do
       before {get :edit, id: admin_tasks.first.id}
 
-      it {expect(response).to redirect_to(new_session_path)}
+      it {expect(response).to redirect_to(log_in_path)}
     end
 
     context "when admin edit self task" do
@@ -284,7 +284,7 @@ RSpec.describe Web::TasksController, type: :controller do
     context 'when not logged in user try access then' do
       before {put :update, id: Task.first.id, task: FactoryGirl.attributes_for(:task)}
 
-      it {expect(response).to redirect_to(new_session_path)}
+      it {expect(response).to redirect_to(log_in_path)}
     end
 
     context "when admin update self task" do
@@ -373,7 +373,7 @@ RSpec.describe Web::TasksController, type: :controller do
     context 'when not logged in user try access then' do
       before {get :show, id: admin_tasks.first.id}
 
-      it {expect(response).to redirect_to(new_session_path)}
+      it {expect(response).to redirect_to(log_in_path)}
     end
 
     context "when admin show self task" do
@@ -448,7 +448,7 @@ RSpec.describe Web::TasksController, type: :controller do
     context 'when not logged in user try access then' do
       before {delete :destroy, id: Task.first.id}
 
-      it {expect(response).to redirect_to(new_session_path)}
+      it {expect(response).to redirect_to(log_in_path)}
     end
 
     context "when admin destroy self task" do
@@ -514,7 +514,7 @@ RSpec.describe Web::TasksController, type: :controller do
     context 'when not logged user try access then' do
       before {post :start, id: admin.tasks.first.id}
 
-      it {expect(response).to redirect_to(new_session_path)}
+      it {expect(response).to redirect_to(log_in_path)}
     end
 
     context 'when admin set start status to self task' do
@@ -628,7 +628,7 @@ RSpec.describe Web::TasksController, type: :controller do
     context 'when not logged user try access then' do
       before {post :finish, id: admin.tasks.first.id}
 
-      it {expect(response).to redirect_to(new_session_path)}
+      it {expect(response).to redirect_to(log_in_path)}
     end
 
     context 'when admin set finish status to self task' do
@@ -737,7 +737,7 @@ RSpec.describe Web::TasksController, type: :controller do
     context 'when not logged user try access then' do
       before {post :assign_to, id: admin.tasks.first.id}
 
-      it {expect(response).to redirect_to(new_session_path)}
+      it {expect(response).to redirect_to(log_in_path)}
     end
 
     context 'when admin assign task from one user to another' do

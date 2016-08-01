@@ -18,7 +18,7 @@ RSpec.describe Web::WelcomeController, type: :controller do
         get :index
       end
 
-      it {expect(response).to redirect_to(new_session_path)}
+      it {expect(response).to redirect_to(log_in_path)}
     end
   end
 end

@@ -8,11 +8,11 @@ class Web::TasksController < Web::ApplicationController
 
   before_action :authenticate_user
   before_action :protect_restricted_form_params, only: [:create, :update]
-  before_action :load_resource, only: [:edit, :update, :show, :destroy, :start, :finish, :assign_to]
+  before_action :load_resource, only: [:edit, :update, :show, :destroy, :start, :finish, :reactivate, :assign_to]
   before_action :on_resource_not_found, only: [:edit, :update, :show, :destroy]
 
   def index
-    scope = Task.all
+    scope = Task.order(:id)
     scope = scope.where(user_id: current_user.id) if current_user.user?
 
     @tasks = scope.all
@@ -56,25 +56,45 @@ class Web::TasksController < Web::ApplicationController
   end
 
   def start
-    render(json: {status: "ERROR", reason: RESOURCE_NOT_FOUND}) and return if @task.blank?
-    if @task.start
-      render json: {status: "OK", started_at: @task.started_at}
+    if request.post?
+      render(json: {status: "ERROR", reason: RESOURCE_NOT_FOUND}) and return if @task.blank?
+      if @task.start
+        render json: {status: "OK", started_at: @task.started_at}
+      else
+        render json: {status: "ERROR", reason: @task.errors.full_messages.try(:first)}
+      end
     else
-      render json: {status: "ERROR", reason: @task.errors.full_messages.try(:first)}
+      if @task.start
+        redirect_to tasks_path, notice: RESOURCE_UPDATED
+      else
+        redirect_to tasks_path, alert: RESOURCE_DATA_HAS_ERRORS
+      end
     end
-  rescue => e
-    render json: {status: "ERROR", reason: e.message}
   end
 
   def finish
-    render(json: {status: "ERROR", reason: RESOURCE_NOT_FOUND}) and return if @task.blank?
-    if @task.finish
-      render json: {status: "OK", finished_at: @task.finished_at}
+    if request.post?
+      render(json: {status: "ERROR", reason: RESOURCE_NOT_FOUND}) and return if @task.blank?
+      if @task.finish
+        render json: {status: "OK", finished_at: @task.finished_at}
+      else
+        render json: {status: "ERROR", reason: @task.errors.full_messages.try(:first)}
+      end
     else
-      render json: {status: "ERROR", reason: @task.errors.full_messages.try(:first)}
+      if @task.finish
+        redirect_to tasks_path, notice: RESOURCE_UPDATED
+      else
+        redirect_to tasks_path, alert: RESOURCE_DATA_HAS_ERRORS
+      end
     end
-  rescue => e
-    render json: {status: "ERROR", reason: e.message}
+  end
+
+  def reactivate
+    if @task.reactivate
+      redirect_to tasks_path, notice: RESOURCE_UPDATED
+    else
+      redirect_to tasks_path, alert: RESOURCE_DATA_HAS_ERRORS
+    end
   end
 
   def assign_to

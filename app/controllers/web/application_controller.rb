@@ -3,7 +3,7 @@ class Web::ApplicationController < ApplicationController
 
   def authenticate_user
     unless current_user
-      redirect_to new_session_path
+      redirect_to log_in_path
     end
   end
 

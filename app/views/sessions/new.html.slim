@@ -1,1 +1,10 @@
-.container Put here usefull code for session#new action
+#login.container
+  = form_tag '/sessions',  role: "form" do
+    .form-group
+      = label_tag :email
+      = text_field_tag :email
+    .form-group
+      = label_tag :password
+      = password_field_tag :password
+
+    = submit_tag "Login"

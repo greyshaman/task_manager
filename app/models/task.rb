@@ -8,7 +8,7 @@ class Task < ActiveRecord::Base
 
   # States
   state_machine :state, initial: :new do
-    after_transition new: :started, do: :on_start
+    after_transition any => :started, do: :on_start
     after_transition started: :finished, do: :on_finish
 
     event :start do
@@ -17,6 +17,10 @@ class Task < ActiveRecord::Base
 
     event :finish do
       transition started: :finished
+    end
+
+    event :reactivate do
+      transition finished: :started
     end
   end
 
