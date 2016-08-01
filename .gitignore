@@ -20,3 +20,4 @@
 *.plan~
 /coverage
 /.rake_tasks~
+/public/uploads
