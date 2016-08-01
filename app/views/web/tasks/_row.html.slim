@@ -3,11 +3,19 @@ tr.item-row
   td= task.description
   - if current_user.admin?
     td= task.user.email
-  td= task.state
+  td
+    = task.state
+  td
+    .btn-group
+      - if task.new?
+        = render '/shared/action_button', glyphicon_class: "glyphicon-play", title: "start", action_path: easy_start_task_path(task)
+      - if task.started?
+        = render '/shared/action_button', glyphicon_class: "glyphicon-stop", title: "finish", action_path: easy_finish_task_path(task)
+      - if task.finished?
+        = render '/shared/action_button', glyphicon_class: "glyphicon-repeat", title: "reactivate", action_path: easy_reactivate_task_path(task)
   td= task.created_at.try(:strftime, '%d/%m/%Y %H:%M')
   td
     .btn-group
       = render '/shared/action_button', glyphicon_class: "glyphicon-edit", title: "edit", action_path: edit_task_path(task)
       = render '/shared/action_button', glyphicon_class: "glyphicon-search", title: "view", action_path: task_path(task)
       = render '/shared/action_button', glyphicon_class: "glyphicon-trash", title: "delete", action_path: "/tasks/#{task.id}", method: "delete", confirm: "You trying delete task! Are you sure?"
-

@@ -4,7 +4,10 @@ Rails.application.routes.draw do
     resources :tasks do
       member do
         post :start
+        get  :start, as: :easy_start
         post :finish
+        get  :finish, as: :easy_finish
+        get  :reactivate, as: :easy_reactivate
         post :assign_to
       end
     end

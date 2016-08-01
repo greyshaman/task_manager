@@ -1,7 +1,8 @@
 .container
   .row
     .col-md-3
-      .h2 Task list:
+      .h3
+        b Task list:
     .col-md-1.col-md-offset-8
       == link_to "Create New", new_task_path, class: "btn btn-success"
   .row
@@ -14,6 +15,7 @@
             - if current_user.admin?
               td User
             td State
+            td
             td Create
             td Actions
         tbody

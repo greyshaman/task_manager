@@ -2,9 +2,10 @@
   = f.input :name
   = f.input :description
   - if current_user.admin?
-    = f.input :user_id, collection: User.all, label_method: :email, value_method: :id
+    = f.input :user_id, collection: User.all, label_method: :email, value_method: :id, include_blank: false
   - else
     = f.input :user_id, as: :hidden
 
-  = f.button :submit, class: "btn btn-primary"
-  = link_to "Cancel", :back, class: "btn btn-warning", data: {confirm: 'Are you sure to leave this page?'}
+  .btn-group
+    = f.button :submit, class: "btn btn-primary"
+    = link_to "Cancel", :back, class: "btn btn-warning", data: {confirm: 'Are you sure to leave this page?'}
