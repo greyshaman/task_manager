@@ -13,6 +13,10 @@
           dt Description
           dd= @task.description
 
+          - unless @task.attachment.file.nil?
+            dt Attachment
+            dd= image_tag @task.attachment_url
+
           - if current_user.admin?
             dt User assigned
             dd= @task.user.email

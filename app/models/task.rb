@@ -29,6 +29,9 @@ class Task < ActiveRecord::Base
   scope :started, ->{where(state: 'started')}
   scope :finished, ->{where(state: 'finished')}
 
+  # Attachments
+  mount_uploader :attachment, AttachmentUploader
+
   private
     def on_start
       update_attribute :started_at, DateTime.now

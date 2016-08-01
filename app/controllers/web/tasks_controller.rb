@@ -111,7 +111,7 @@ class Web::TasksController < Web::ApplicationController
 
   private
     def resource_params
-      params.require(:task).permit(:name, :description, :user_id)
+      params.require(:task).permit(:name, :description, :user_id, :attachment, :attachment_cache, :remote_attachment_url)
     end
 
     def user_id_for_task(user_id_from_param = params[:user_id])

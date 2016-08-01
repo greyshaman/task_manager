@@ -1,6 +1,10 @@
 = simple_form_for @task, class: "form-horizontal", role: "form" do |f|
   = f.input :name
   = f.input :description
+  = f.input :remote_attachment_url
+  = image_tag @task.attachment_url if @task.attachment.file.present?
+  = f.file_field :attachment
+  = f.input :attachment_cache, as: :hidden
   - if current_user.admin?
     = f.input :user_id, collection: User.all, label_method: :email, value_method: :id, include_blank: false
   - else

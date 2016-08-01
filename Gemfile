@@ -48,6 +48,8 @@ gem "slim"
 
 gem 'rails_12factor', group: :production
 
+gem 'carrierwave'
+
 
 
 # Use Unicorn as the app server
