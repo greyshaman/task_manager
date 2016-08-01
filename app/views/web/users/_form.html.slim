@@ -1,0 +1,11 @@
+= simple_form_for @user, class: "form-horizontal", role: "form" do |f|
+  = f.input :email
+  = f.input :password
+  = f.input :password_confirmation
+  - if current_user.admin?
+    = f.input :role, collection: User::ROLES, include_blank: false
+
+  .btn-group
+    = f.button :submit, class: "btn btn-primary"
+    = link_to "Cancel", :back, class: "btn btn-warning", data: {confirm: 'Are you sure to leave this page?'}
+

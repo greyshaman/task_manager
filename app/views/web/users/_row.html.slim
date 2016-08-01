@@ -1,0 +1,12 @@
+tr.item-row
+  td= user.email
+  td= user.role
+  td= user.created_at.try(:strftime, '%d/%m/%Y %H:%M')
+  td= user.updated_at.try(:strftime, '%d/%m/%Y %H:%M')
+  td
+    .btn-group
+      = render '/shared/action_button', glyphicon_class: "glyphicon-edit", title: "edit", action_path: edit_user_path(user)
+      = render '/shared/action_button', glyphicon_class: "glyphicon-search", title: "view", action_path: user_path(user)
+      - unless current_user.id == user.id
+        = render '/shared/action_button', glyphicon_class: "glyphicon-trash", title: "delete", action_path: "/user/#{user.id}", method: "delete", confirm: "You trying delete account! Are you sure?"
+
