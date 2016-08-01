@@ -19,7 +19,6 @@ RSpec.describe 'Authorization' do
       login_helper admin.email, PASSWORD
     end
 
-    it {expect(page).to have_selector(".container")}
     it {expect(page).to have_selector("table.table")}
     it {expect(page).to have_selector("table.table tr.item-row", count: Task.count)}
     it {expect(page).to have_selector("table.table tr.item-row:first td", count: 7)}
