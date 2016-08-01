@@ -12,7 +12,7 @@ RSpec.describe 'Authorization' do
     it 'successful authorization with correct credentials' do
       login_helper admin.email, "Password"
 
-      expect(page).to have_content('Tasks list')
+      expect(page).to have_content('Task list')
     end
 
     it 'failed login when specified incorrect email' do
