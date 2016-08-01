@@ -1,6 +1,6 @@
 tr.item-row
   td= task.name
-  td= task.description
+  td title="#{task.description if task.description && task.description.length > 30}" = task.description.try(:truncate, 30, separator: '...')
   - if current_user.admin?
     td= task.user.email
   td
