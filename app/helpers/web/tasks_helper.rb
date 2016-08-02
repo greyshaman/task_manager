@@ -5,6 +5,7 @@ module Web::TasksHelper
     else
       link_to(@task.attachment.model[:attachment], @task.attachment_url, target: '_blank')
     end
-  rescue ""
+  rescue
+    ""
   end
 end
