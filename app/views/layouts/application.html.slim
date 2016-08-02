@@ -9,4 +9,6 @@ html lang="en"
   body
     - if @current_user.present?
       = render "/shared/nav_bar"
-    = yield
+    .container
+      = flash_messages
+      = yield

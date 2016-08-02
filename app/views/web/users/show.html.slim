@@ -1,21 +1,20 @@
-.container
-  .row
-    .col-md-3
-      .h3
-        b User details:
-  .row
-    .col-md-12
-      .row
-        dl.dl-horizontal
-          dt Email
-          dd= @user.email
+.row
+  .col-md-3
+    .h3
+      b User details:
+.row
+  .col-md-12
+    .row
+      dl.dl-horizontal
+        dt Email
+        dd= @user.email
 
-          - if current_user.admin?
-            dt Role
-            dd= @user.role
-  .row
-    .col-md-4
-      .btn-group
-        = link_to 'Edit', edit_user_path(@user), class: "btn btn-success"
         - if current_user.admin?
-          = link_to 'To List', users_path, class: 'btn btn-default'
+          dt Role
+          dd= @user.role
+.row
+  .col-md-4
+    .btn-group
+      = link_to 'Edit', edit_user_path(@user), class: "btn btn-success"
+      - if current_user.admin?
+        = link_to 'To List', users_path, class: 'btn btn-default'

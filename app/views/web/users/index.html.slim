@@ -1,20 +1,19 @@
-.container
-  .row
-    .col-md-3
-      .h3
-        b User list:
-    .col-md-1.col-md-offset-8
-      == link_to "Create New", new_user_path, class: "btn btn-success"
-  .row
-    .col-md-12
-      table.table.table-striped.table-hover
-        thead
-          tr
-            td Email
-            td Role
-            td Created at
-            td Updated at
-            td Actions
-        tbody
-          = render partial: "row", collection: @users, as: :user
+.row
+  .col-md-3
+    .h3
+      b User list:
+  .col-md-1.col-md-offset-8
+    == link_to "Create New", new_user_path, class: "btn btn-success"
+.row
+  .col-md-12
+    table.table.table-striped.table-hover
+      thead
+        tr
+          td Email
+          td Role
+          td Created at
+          td Updated at
+          td Actions
+      tbody
+        = render partial: "row", collection: @users, as: :user
 
