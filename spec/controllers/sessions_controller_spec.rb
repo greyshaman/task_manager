@@ -21,6 +21,14 @@ RSpec.describe SessionsController, type: :controller do
       it {expect(flash[:notice]).to eq("Logged in!")}
     end
 
+    context "when entered correct credentials with capital letters in email" do
+      before {post :create, email: "User@example.com", password: "Password"}
+
+      it {expect(session[:user_id]).to eq(user.id)}
+      it {expect(response).to redirect_to(root_url)}
+      it {expect(flash[:notice]).to eq("Logged in!")}
+    end
+
     context "when entered incorrext email" do
       before {post :create, email: "other@example.com", password: "Password"}
 
