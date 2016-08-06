@@ -5,10 +5,10 @@ class Web::TasksController < Web::ApplicationController
   before_action :on_resource_not_found, only: [:edit, :update, :show, :destroy]
 
   def index
-    scope = Task.order(:id)
-    scope = scope.where(user_id: current_user.id) if current_user.user?
+    tasks = Task.order(:id)
+    tasks = tasks.where(user_id: current_user.id) if current_user.user?
 
-    @tasks = scope.all
+    @tasks = tasks.all
   end
 
   def new
@@ -30,9 +30,8 @@ class Web::TasksController < Web::ApplicationController
   end
 
   def update
-    @task.assign_attributes(resource_params)
 
-    if @task.save
+    if @task.update_attributes(resource_params)
       redirect_to tasks_path, notice: t(:resource_updated, scope: 'task.messages')
     else
       flash.now.alert = t(:resource_data_has_errors, scope: 'task.messages')
