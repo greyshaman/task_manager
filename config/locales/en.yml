@@ -20,4 +20,19 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  permission_denied:        "Permission denied!"
+  task:
+    messages:
+      resource_not_found:       "Task not found!"
+      resource_created:         "Task has been created successfuly!"
+      resource_updated:         "Task has been updated successfuly!"
+      resource_data_has_errors: "Task data contains errors!"
+      resource_removed:         "Task has been removed!"
+  user:
+    messages:
+      resource_not_found:           "User not found!"
+      resource_created:             "User has been created successfuly!"
+      resource_updated:             "User has been updated successfuly!"
+      resource_data_has_errors:     "User data contains errors!"
+      resource_removed:             "User has been removed!"
+      admin_selfdestruction_error:  "Admin cannot remove himself!"
