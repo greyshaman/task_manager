@@ -8,8 +8,12 @@ class Task < ActiveRecord::Base
 
   # States
   state_machine :state, initial: :new do
-    after_transition any => :started, do: :on_start
-    after_transition started: :finished, do: :on_finish
+    before_transition any => :started do |task, transition|
+      task.started_at = DateTime.now
+    end
+    before_transition started: :finished do |task, transition|
+      task.finished_at = DateTime.now
+    end
 
     event :start do
       transition :new => :started
@@ -31,13 +35,4 @@ class Task < ActiveRecord::Base
 
   # Attachments
   mount_uploader :attachment, AttachmentUploader
-
-  private
-    def on_start
-      update_attribute :started_at, DateTime.now
-    end
-
-    def on_finish
-      update_attribute :finished_at, DateTime.now
-    end
 end
