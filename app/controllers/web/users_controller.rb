@@ -27,8 +27,7 @@ class Web::UsersController < Web::ApplicationController
   end
 
   def update
-    @user.assign_attributes(resource_params)
-    if @user.save
+    if @user.assign_attributes(resource_params)
       redirect_to resolve_redirect_path, notice: t(:resource_updated, scope: 'user.messages')
     else
       flash.now.alert = t(:resource_data_has_errors, scope: 'user.messages')
