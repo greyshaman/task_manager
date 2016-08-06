@@ -1,11 +1,4 @@
 class Web::TasksController < Web::ApplicationController
-  RESOURCE_NOT_FOUND       = "Task not found!"
-  RESOURCE_CREATED         = "Task has been created successfuly!"
-  RESOURCE_UPDATED         = "Task has been updated successfuly!"
-  RESOURCE_DATA_HAS_ERRORS = "Task data contains errors!"
-  PERMISSION_DENIED        = "Permission denied!"
-  RESOURCE_REMOVED         = "Task has been removed!"
-
   before_action :authenticate_user
   before_action :protect_restricted_form_params, only: [:create, :update]
   before_action :load_resource, only: [:edit, :update, :show, :destroy, :start, :finish, :reactivate, :assign_to]
@@ -26,9 +19,9 @@ class Web::TasksController < Web::ApplicationController
     @task = Task.new(resource_params)
 
     if @task.save
-      redirect_to tasks_path, notice: RESOURCE_CREATED
+      redirect_to tasks_path, notice: t(:resource_created, scope: 'task.messages')
     else
-      flash.now.alert = RESOURCE_DATA_HAS_ERRORS
+      flash.now.alert = t(:resource_data_has_errors, scope: 'task.messages')
       render :new
     end
   end
@@ -40,9 +33,9 @@ class Web::TasksController < Web::ApplicationController
     @task.assign_attributes(resource_params)
 
     if @task.save
-      redirect_to tasks_path, notice: RESOURCE_UPDATED
+      redirect_to tasks_path, notice: t(:resource_updated, scope: 'task.messages')
     else
-      flash.now.alert = RESOURCE_DATA_HAS_ERRORS
+      flash.now.alert = t(:resource_data_has_errors, scope: 'task.messages')
       render :edit
     end
   end
@@ -52,12 +45,12 @@ class Web::TasksController < Web::ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to tasks_path, notice: RESOURCE_REMOVED
+    redirect_to tasks_path, notice: t(:resource_removed, scope: 'task.messages')
   end
 
   def start
     if request.post?
-      render(json: {status: "ERROR", reason: RESOURCE_NOT_FOUND}) and return if @task.blank?
+      render(json: {status: "ERROR", reason: t(:resource_not_found, scope: 'task.messages')}) and return if @task.blank?
       if @task.start
         render json: {status: "OK", started_at: @task.started_at}
       else
@@ -65,16 +58,16 @@ class Web::TasksController < Web::ApplicationController
       end
     else
       if @task.start
-        redirect_to tasks_path, notice: RESOURCE_UPDATED
+        redirect_to tasks_path, notice: t(:resource_updated, scope: 'task.messages')
       else
-        redirect_to tasks_path, alert: RESOURCE_DATA_HAS_ERRORS
+        redirect_to tasks_path, alert: t(:resource_data_has_errors, scope: 'task.messages')
       end
     end
   end
 
   def finish
     if request.post?
-      render(json: {status: "ERROR", reason: RESOURCE_NOT_FOUND}) and return if @task.blank?
+      render(json: {status: "ERROR", reason: t(:resource_not_found, scope: 'task.messages')}) and return if @task.blank?
       if @task.finish
         render json: {status: "OK", finished_at: @task.finished_at}
       else
@@ -82,25 +75,25 @@ class Web::TasksController < Web::ApplicationController
       end
     else
       if @task.finish
-        redirect_to tasks_path, notice: RESOURCE_UPDATED
+        redirect_to tasks_path, notice: t(:resource_updated, scope: 'task.messages')
       else
-        redirect_to tasks_path, alert: RESOURCE_DATA_HAS_ERRORS
+        redirect_to tasks_path, alert: t(:resource_data_has_errors, scope: 'task.messages')
       end
     end
   end
 
   def reactivate
     if @task.reactivate
-      redirect_to tasks_path, notice: RESOURCE_UPDATED
+      redirect_to tasks_path, notice: t(:resource_updated, scope: 'task.messages')
     else
-      redirect_to tasks_path, alert: RESOURCE_DATA_HAS_ERRORS
+      redirect_to tasks_path, alert: t(:resource_data_has_errors, scope: 'task.messages')
     end
   end
 
   def assign_to
-    render(json: {status: 'ERROR', reason: PERMISSION_DENIED}) and return unless current_user.admin?
-    render(json: {status: "ERROR", reason: RESOURCE_NOT_FOUND}) and return if @task.blank?
-    render(json: {status: "ERROR", reason: Web::UsersController::RESOURCE_NOT_FOUND}) and return unless User.exists?(params[:user_id])
+    render(json: {status: 'ERROR', reason: t(:permission_denied)}) and return unless current_user.admin?
+    render(json: {status: "ERROR", reason: t(:resource_not_found, scope: 'task.messages')}) and return if @task.blank?
+    render(json: {status: "ERROR", reason: t(:resource_not_found, scope: 'user.messages')}) and return unless User.exists?(params[:user_id])
     @task.user_id = params[:user_id]
     if @task.save
       render json: {status: "OK"}
@@ -136,6 +129,6 @@ class Web::TasksController < Web::ApplicationController
     end
 
     def on_resource_not_found
-      redirect_to tasks_path, alert: RESOURCE_NOT_FOUND unless @task.present?
+      redirect_to tasks_path, alert: t(:resource_not_found, scope: 'task.messages') unless @task.present?
     end
 end

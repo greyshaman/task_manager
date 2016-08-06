@@ -1,12 +1,4 @@
 class Web::UsersController < Web::ApplicationController
-  RESOURCE_NOT_FOUND          = "User not found!"
-  RESOURCE_CREATED            = "User has been created successfuly!"
-  RESOURCE_UPDATED            = "User has been updated successfuly!"
-  RESOURCE_DATA_HAS_ERRORS    = "User data contains errors!"
-  PERMISSION_DENIED           = "Permission denied!"
-  RESOURCE_REMOVED            = "User has been removed!"
-  ADMIN_SELFDESTRUCTION_ERROR = "Admin cannot remove himself!"
-
   before_action :authenticate_user
   before_action :check_admin_permissions, only: [:index, :new, :create, :destroy]
   before_action :check_admin_or_self_permissions, only: [:edit, :update, :show]
@@ -24,9 +16,9 @@ class Web::UsersController < Web::ApplicationController
     @user = User.new(resource_params)
 
     if @user.save
-      redirect_to users_path, notice: RESOURCE_CREATED
+      redirect_to users_path, notice: t(:resource_created, scope: 'user.messages')
     else
-      flash.now.alert = RESOURCE_DATA_HAS_ERRORS
+      flash.now.alert = t(:resource_data_has_errors, scope: 'user.messages')
       render :new
     end
   end
@@ -37,9 +29,9 @@ class Web::UsersController < Web::ApplicationController
   def update
     @user.assign_attributes(resource_params)
     if @user.save
-      redirect_to resolve_redirect_path, notice: RESOURCE_UPDATED
+      redirect_to resolve_redirect_path, notice: t(:resource_updated, scope: 'user.messages')
     else
-      flash.now.alert = RESOURCE_DATA_HAS_ERRORS
+      flash.now.alert = t(:resource_data_has_errors, scope: 'user.messages')
       render :edit
     end
   end
@@ -48,18 +40,18 @@ class Web::UsersController < Web::ApplicationController
   end
 
   def destroy
-    redirect_to users_path, alert: ADMIN_SELFDESTRUCTION_ERROR and return if current_user.admin? && current_user.id == params[:id].to_i
+    redirect_to users_path, alert: t(:admin_selfdestruction_error, scope: 'user.messages') and return if current_user.admin? && current_user.id == params[:id].to_i
     @user.destroy
-    redirect_to resolve_redirect_path, notice: RESOURCE_REMOVED
+    redirect_to resolve_redirect_path, notice: t(:resource_removed, scope: 'user.messages')
   end
 
   private
     def check_admin_permissions
-      redirect_to user_path(current_user), alert: PERMISSION_DENIED unless current_user.admin?
+      redirect_to user_path(current_user), alert: t(:permission_denied) unless current_user.admin?
     end
 
     def check_admin_or_self_permissions
-      redirect_to user_path(current_user), alert: PERMISSION_DENIED unless current_user.admin? || current_user.id == params[:id].try(:to_i)
+      redirect_to user_path(current_user), alert: t(:permission_denied) unless current_user.admin? || current_user.id == params[:id].try(:to_i)
     end
 
     def resource_params
@@ -69,7 +61,7 @@ class Web::UsersController < Web::ApplicationController
     def load_resource
       @user = User.where(id: params[:id]).first
 
-      redirect_to resolve_redirect_path, alert: RESOURCE_NOT_FOUND if @user.blank?
+      redirect_to resolve_redirect_path, alert: t(:resource_not_found, scope: 'user.messages') if @user.blank?
     end
 
     def resolve_redirect_path
