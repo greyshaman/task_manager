@@ -2,18 +2,17 @@ FactoryGirl.define do
   factory :task do
     name  "Weak Up"
     user
-    state "new"
 
     trait :started do
-      after(:create) do |_task|
-        _task.start
+      after(:create) do |task|
+        task.start
       end
     end
 
     trait :finished do
-      after(:create) do |_task|
-        _task.start
-        _task.finish
+      after(:create) do |task|
+        task.start
+        task.finish
       end
     end
 
