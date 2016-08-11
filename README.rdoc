@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/greyshaman/task_manager.svg?branch=development)](https://travis-ci.org/greyshaman/task_manager)
 == README
 
 This README would normally document whatever steps are necessary to get the
