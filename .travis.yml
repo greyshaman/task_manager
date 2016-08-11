@@ -4,5 +4,5 @@ rvm:
 services:
   - postgresql
 before_script:
-  - psql -c "create role shaman with createdb login encrypted password '<%= ENV['PGSQL_USER_PASSWORD'].to_s rescue '' %>;" -U postgres
+  - psql -c "create role shaman with createdb login encrypted password '#{ENV['PGSQL_USER_PASSWORD'].to_s rescue ''}';" -U postgres
   - psql -c 'create database task_manager_test owner shaman;' -U postgres
