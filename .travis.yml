@@ -1,3 +1,8 @@
 language: ruby
 rvm:
  - 2.3.1
+services:
+  - postgresql
+before_script:
+  - psql -c 'create role shaman with createdb login encrypted password \'Pa55w0rd\';' -U postgres
+  - psql -c 'create database test_task_test owner shaman;' -U postgres
