@@ -4,9 +4,11 @@
   2.3.1p112
 
 * Database creation
-  sudo -u postgres pg
-  CREATE DATABASE task_manager_development OWNER <db_owner>;
-  CREATE DATABASE task_manager_test OWNER <db_owner>;
+
+    sudo -u postgres pg
+    CREATE DATABASE task_manager_development OWNER <db_owner>;
+    CREATE DATABASE task_manager_test OWNER <db_owner>;
+
 
 * Database initialization
 
